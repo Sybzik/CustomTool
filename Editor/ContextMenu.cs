@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
+using UnityEditor.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System; using System.Reflection;
@@ -27,6 +29,7 @@ public class ContextMenu
         Debug.Log("<color=green>" + j + "</color> | " + "Number of Objects");
         
     }
+
     [MenuItem("Utills/Debug/Clear console", false, 101)]
     public static void _clearConsole()
     {
@@ -36,6 +39,7 @@ public class ContextMenu
         MethodInfo method = type.GetMethod("Clear");
         method.Invoke(new object(), null);
     }
+
     [MenuItem("Utills/Instantiate/Platform", false, 101)]
     public static void _platform()
     {
@@ -47,10 +51,11 @@ public class ContextMenu
         else
         {
             PrefabUtility.InstantiatePrefab(prefab);
-            prefab.transform.position = new Vector3(0f, 0f, 0f);
+            prefab.transform.position = Vector3.zero;
             Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
         }
     }
+
     [MenuItem("Utills/Instantiate/CrossHair", false, 101)]
     public static void _crossHair()
     {
@@ -63,14 +68,97 @@ public class ContextMenu
         {
             if (GameObject.FindObjectOfType<Canvas>())
             {
-                PrefabUtility.InstantiatePrefab(prefab,GameObject.FindObjectOfType<Canvas>().transform);
-                prefab.transform.position = new Vector3(0f, 0f, 0f);
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = Vector3.zero;
                 Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
             }
             else
             {
-                Debug.LogWarning("<color=red>Fatal error:</color> Canvas was not found | Please create it");
+                string canvasfileLocation = "Assets/Editor/Prefabs/UiPrefabs/Canvas.prefab";
+                GameObject canvasPref = AssetDatabase.LoadAssetAtPath(canvasfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(canvasPref);
+                canvasPref.transform.position = Vector3.zero;
+
+                string eventfileLocation = "Assets/Editor/Prefabs/UiPrefabs/EventSystem.prefab";
+                GameObject eventPref = AssetDatabase.LoadAssetAtPath(eventfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(eventPref);
+                eventPref.transform.position = Vector3.zero;
+
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = new Vector3(0f, 0f, 0f);
+                Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
             }
         }
     }
+
+    [MenuItem("Utills/Instantiate/Timer", false, 101)]
+    public static void _timer()
+    {
+        string fileLocation = "Assets/Editor/Prefabs/UiPrefabs/TimerText.prefab";
+        GameObject prefab = AssetDatabase.LoadAssetAtPath(fileLocation, typeof(GameObject)) as GameObject;
+
+        if (prefab == null)
+            Debug.LogWarning("<color=red>Fatal error:</color> The file in the directory: " + fileLocation + " was not found | Check if the directory is correct");
+        else
+        {
+            if (GameObject.FindObjectOfType<Canvas>())
+            {
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = Vector3.zero;
+                Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
+            }
+            else
+            {
+                string canvasfileLocation = "Assets/Editor/Prefabs/UiPrefabs/Canvas.prefab";
+                GameObject canvasPref = AssetDatabase.LoadAssetAtPath(canvasfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(canvasPref);
+                canvasPref.transform.position = Vector3.zero;
+
+                string eventfileLocation = "Assets/Editor/Prefabs/UiPrefabs/EventSystem.prefab";
+                GameObject eventPref = AssetDatabase.LoadAssetAtPath(eventfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(eventPref);
+                eventPref.transform.position = Vector3.zero;
+
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = Vector3.zero;
+                Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
+            }
+        }
+    }
+
+    [MenuItem("Utills/Instantiate/Window preset", false, 101)]
+    public static void _window()
+    {
+        string fileLocation = "Assets/Editor/Prefabs/UiPrefabs/WindowPreset.prefab";
+        GameObject prefab = AssetDatabase.LoadAssetAtPath(fileLocation, typeof(GameObject)) as GameObject;
+
+        if (prefab == null)
+            Debug.LogWarning("<color=red>Fatal error:</color> The file in the directory: " + fileLocation + " was not found | Check if the directory is correct");
+        else
+        {
+            if (GameObject.FindObjectOfType<Canvas>())
+            {
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = Vector3.zero;
+                Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
+            }
+            else
+            {
+                string canvasfileLocation = "Assets/Editor/Prefabs/UiPrefabs/Canvas.prefab";
+                GameObject canvasPref = AssetDatabase.LoadAssetAtPath(canvasfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(canvasPref);
+                canvasPref.transform.position = Vector3.zero;
+
+                string eventfileLocation = "Assets/Editor/Prefabs/UiPrefabs/EventSystem.prefab";
+                GameObject eventPref = AssetDatabase.LoadAssetAtPath(eventfileLocation, typeof(GameObject)) as GameObject;
+                PrefabUtility.InstantiatePrefab(eventPref);
+                eventPref.transform.position = Vector3.zero;
+
+                PrefabUtility.InstantiatePrefab(prefab, GameObject.FindObjectOfType<Canvas>().transform);
+                prefab.transform.position = Vector3.zero;
+                Debug.Log("<color=green>Instantiate: " + prefab.name + " | Successfully</color>");
+            }
+        }
+    }
+
 }
